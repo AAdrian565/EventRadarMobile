@@ -1,3 +1,4 @@
+import 'package:event_radar2/authentication/register_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../components/auth/auth_textfield.dart';
@@ -5,13 +6,16 @@ import '../components/auth/service_button.dart';
 import '../components/auth/sign_button.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       //email field
                       AuthTextField(
+                        controller: emailController,
                         hintText: 'Email',
                         obscureText: false,
                         prefixIcon:
@@ -95,8 +100,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       //username field
                       AuthTextField(
+                        controller: passwordController,
                         hintText: 'Password',
-                        obscureText: false,
+                        obscureText: true,
                         prefixIcon: Image.asset('asset/img/auth/key_icon.png'),
                         suffixIcon: Icon(Icons.remove_red_eye),
                       ),
@@ -192,13 +198,21 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.grey,
                       ),
                     ),
-                    Text(
-                      ' Create one',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w400,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterPage()));
+                      },
+                      child: Text(
+                        ' Create one',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ],
