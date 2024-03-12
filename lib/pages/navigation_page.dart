@@ -1,4 +1,5 @@
 import 'package:event_radar2/pages/home_screen.dart';
+import 'package:event_radar2/pages/schedule/schedule_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _NavigationPage extends State<NavigationPage> {
         index: currentPageIndex,
         children: const <Widget>[
           HomePage(),
-          HomePage(), // NOTE: Add some page here
+          SchedulePage(), // NOTE: Add some page here
           HomePage(), // NOTE: Add some page here
           HomePage(), // NOTE: Add some page here
         ],

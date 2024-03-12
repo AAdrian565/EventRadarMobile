@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +16,13 @@ class _HomePageState extends State<HomePage> {
     {"id": 2, "image_path": 'asset/img/homepage/adpage2.png'},
   ];
 
+  final user = FirebaseAuth.instance.currentUser!;
+
+  //sign out
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   final CarouselController carouselController = CarouselController();
   final TextEditingController _searchController = TextEditingController();
   int adIndex = 0;
@@ -22,35 +30,38 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        flexibleSpace: Container(
-          width: 378,
-          height: 37,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        title: TextField(
-          controller: _searchController,
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: Colors.grey,
-          ),
-          decoration: InputDecoration(
-            prefixIcon: Image.asset('asset/img/homepage/search_icon.png'),
-            hintText: 'Search public speaking webinar',
-            hintStyle: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey,
-            ),
-            border: InputBorder.none,
-          ),
-          onChanged: (value) {},
-        ),
+        // automaticallyImplyLeading: false,
+        // flexibleSpace: Container(
+        //   width: 378,
+        //   height: 37,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(8),
+        //   ),
+        // ),
+        actions: [
+          IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
+        ],
+        // title: TextField(
+        //   controller: _searchController,
+        //   style: TextStyle(
+        //     fontFamily: 'Poppins',
+        //     fontSize: 12,
+        //     fontWeight: FontWeight.w600,
+        //     color: Colors.grey,
+        //   ),
+        //   decoration: InputDecoration(
+        //     prefixIcon: Image.asset('asset/img/homepage/search_icon.png'),
+        //     hintText: 'Search public speaking webinar',
+        //     hintStyle: TextStyle(
+        //       fontFamily: 'Poppins',
+        //       fontSize: 12,
+        //       fontWeight: FontWeight.w600,
+        //       color: Colors.grey,
+        //     ),
+        //     border: InputBorder.none,
+        //   ),
+        //   onChanged: (value) {},
+        // ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

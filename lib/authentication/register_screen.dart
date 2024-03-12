@@ -1,18 +1,71 @@
 import 'package:event_radar2/authentication/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/auth/auth_textfield.dart';
 import '../components/auth/sign_button.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final Function()? onTap;
+  RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   bool? isAgree = false;
+
+  //sign user in method
+  void signUserIn() async {
+    //loading buffer
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    //sign in
+    try {
+      //check password
+      if (passwordController.text == confirmPasswordController.text &&
+          isAgree == true) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+      } else {
+        showErrorMessage("Mohon lengkapi data sesuai terlebih dahulu");
+      }
+
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+      showErrorMessage(e.code);
+    }
+  }
+
+  void showErrorMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.green,
+            title: Center(
+                child: Text(
+              message,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            )),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       //email field
                       AuthTextField(
+                        controller: emailController,
                         hintText: 'Email',
                         obscureText: false,
                         prefixIcon:
@@ -123,8 +177,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       //password field
                       AuthTextField(
+                        controller: passwordController,
                         hintText: 'Password',
-                        obscureText: false,
+                        obscureText: true,
                         prefixIcon: Image.asset('asset/img/auth/key_icon.png'),
                         suffixIcon: Icon(Icons.remove_red_eye),
                       ),
@@ -162,8 +217,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       //confirm password field
                       AuthTextField(
+                        controller: confirmPasswordController,
                         hintText: 'Re-enter Password',
-                        obscureText: false,
+                        obscureText: true,
                         prefixIcon: Image.asset('asset/img/auth/key_icon.png'),
                         suffixIcon: Icon(Icons.remove_red_eye),
                       ),
@@ -213,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 15,
                 ),
                 MyButton(
-                  onTap: () {},
+                  onTap: signUserIn,
                   text: 'Sign Up',
                   color: Colors.blue,
                 ),
@@ -233,12 +289,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()));
-                      },
+                      onTap: widget.onTap,
                       child: Text(
                         ' Sign In',
                         style: TextStyle(

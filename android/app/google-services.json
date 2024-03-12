@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "476068595705",
+    "project_id": "eventradar-371df",
+    "storage_bucket": "eventradar-371df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476068595705:android:79b51d20cc2a6b3adc5f28",
+        "android_client_info": {
+          "package_name": "com.example.event_radar2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTyD-_jr9vna6gJd9WG7tdXNXK0z2z-hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

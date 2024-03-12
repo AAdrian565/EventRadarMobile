@@ -1,8 +1,7 @@
-import 'package:event_radar2/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'authentication/login_screen.dart';
+import 'authentication/auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,12 +19,13 @@ class _SplashScreenState extends State<SplashScreen>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => AuthPage()));
     });
   }
 
   @override
   void dispose() {
+    super.dispose();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
   }

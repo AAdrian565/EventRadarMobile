@@ -1,5 +1,5 @@
 import 'package:event_radar2/authentication/register_screen.dart';
-import 'package:event_radar2/pages/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/auth/auth_textfield.dart';
@@ -7,7 +7,8 @@ import '../components/auth/service_button.dart';
 import '../components/auth/sign_button.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  final Function()? onTap;
+  LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,6 +17,48 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  //sign user in method
+  void signUserIn() async {
+    //loading buffer
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    //sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+      showErrorMessage(e.code);
+    }
+  }
+
+  void showErrorMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.green,
+            title: Center(
+                child: Text(
+              message,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            )),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,10 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 MyButton(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  },
+                  onTap: signUserIn,
                   text: 'Sign In',
                   color: Colors.blue,
                 ),
@@ -203,12 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterPage()));
-                      },
+                      onTap: widget.onTap,
                       child: Text(
                         ' Create one',
                         style: TextStyle(
