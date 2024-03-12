@@ -1,4 +1,5 @@
 import 'package:event_radar2/authentication/register_screen.dart';
+import 'package:event_radar2/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../components/auth/auth_textfield.dart';
@@ -134,7 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 MyButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
                   text: 'Sign In',
                   color: Colors.blue,
                 ),
