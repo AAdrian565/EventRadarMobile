@@ -1,6 +1,8 @@
-import 'package:event_radar2/pages/schedule/schedule_screen.dart';
+import 'package:event_radar2/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'authentication/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => SchedulePage()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
   }
 
@@ -47,10 +49,10 @@ class _SplashScreenState extends State<SplashScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('asset/img/splash/logo_splash.png'),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'EventRadar',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
