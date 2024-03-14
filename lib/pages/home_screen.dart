@@ -1,3 +1,5 @@
+import 'package:event_radar2/components/homepage/homepage_eventcard.dart';
+import 'package:event_radar2/components/homepage/homepage_speakers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,38 +31,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        // flexibleSpace: Container(
-        //   width: 378,
-        //   height: 37,
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(8),
-        //   ),
-        // ),
         actions: [
-          IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
+          IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout)),
         ],
-        // title: TextField(
-        //   controller: _searchController,
-        //   style: TextStyle(
-        //     fontFamily: 'Poppins',
-        //     fontSize: 12,
-        //     fontWeight: FontWeight.w600,
-        //     color: Colors.grey,
-        //   ),
-        //   decoration: InputDecoration(
-        //     prefixIcon: Image.asset('asset/img/homepage/search_icon.png'),
-        //     hintText: 'Search public speaking webinar',
-        //     hintStyle: TextStyle(
-        //       fontFamily: 'Poppins',
-        //       fontSize: 12,
-        //       fontWeight: FontWeight.w600,
-        //       color: Colors.grey,
-        //     ),
-        //     border: InputBorder.none,
-        //   ),
-        //   onChanged: (value) {},
-        // ),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            carousel(),
+            sectionTitle("Trending Events",
+                Image.asset('asset/img/homepage/fire_icon.png')),
+            homepageEvents(),
+            sectionTitle("Popular Speakers",
+                Image.asset('asset/img/homepage/fire_icon.png')),
+            homepageSpeakers(),
+            sectionTitle("Most Followed Communities",
+                Image.asset('asset/img/homepage/fire_icon.png')),
+            homepageComunities(),
+          ],
+        ),
       ),
     );
   }
