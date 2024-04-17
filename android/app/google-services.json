@@ -12,7 +12,20 @@
           "package_name": "com.example.event_radar2"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "476068595705-7uef1d0e2b1uejuf13odie5vlj68ifo5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.event_radar2",
+            "certificate_hash": "3d5548889f5a8e9b7878046f6ece70c3cdbd2555"
+          }
+        },
+        {
+          "client_id": "476068595705-p5159lsjuvo43bfune5j87e895avv8jh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDTyD-_jr9vna6gJd9WG7tdXNXK0z2z-hs"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476068595705-p5159lsjuvo43bfune5j87e895avv8jh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "476068595705-hav8deds32i2v628srtbp70nh4pjrk9a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eventRadar2.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

@@ -1,4 +1,5 @@
 import 'package:event_radar2/pages/home_screen.dart';
+import 'package:event_radar2/pages/profile.dart';
 import 'package:event_radar2/pages/schedule/schedule_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _NavigationPage extends State<NavigationPage> {
           HomePage(),
           SchedulePage(), // NOTE: Add some page here
           HomePage(), // NOTE: Add some page here
-          HomePage(), // NOTE: Add some page here
+          ProfilePage(),
         ],
       ),
     );
