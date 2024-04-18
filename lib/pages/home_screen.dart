@@ -1,6 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:event_radar2/components/homepage/homepage_eventcard.dart';
 import 'package:event_radar2/components/homepage/homepage_speakers.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         InkWell(
           onTap: () {
-            print(adIndex);
+            //print(adIndex);
           },
           child: CarouselSlider(
               items: imageList
@@ -93,8 +93,8 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: imageList.asMap().entries.map((entry) {
-              print(entry);
-              print(entry.key);
+              //print(entry);
+              //print(entry.key);
               return GestureDetector(
                 onTap: () => carouselController.animateToPage(entry.key),
                 child: Container(
@@ -118,17 +118,22 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       width: 400,
       height: 100,
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 4,
-          itemBuilder: (context, index) {
-            return HomepageProfile(
-              image: Image.asset('asset/img/homepage/comunity1.png'),
-              name: "John Doe $index",
-            );
-          },
-        ),
+      child: Flex(
+        direction: Axis.horizontal,
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return HomepageProfile(
+                  image: Image.asset('asset/img/homepage/comunity1.png'),
+                  name: "John Doe $index",
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -136,21 +141,26 @@ class _HomePageState extends State<HomePage> {
   Widget homepageEvents() {
     return SizedBox(
       height: 310,
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 3, // Number of items you want to display
-          itemBuilder: (context, index) {
-            return HomepageEventCard(
-              title: "Public Speaking Webinar",
-              image: Image.asset('asset/img/homepage/event1.png'),
-              lastRegistrationDate: DateTime.now(),
-              eventDate: DateTime.now(),
-              eventType: "Webinar",
-              eventCategory: ["Public Speaking", "Webinar"],
-            );
-          },
-        ),
+      child: Flex(
+        direction: Axis.horizontal,
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 3, // Number of items you want to display
+              itemBuilder: (context, index) {
+                return HomepageEventCard(
+                  title: "Public Speaking Webinar",
+                  image: Image.asset('asset/img/homepage/event1.png'),
+                  lastRegistrationDate: DateTime.now(),
+                  eventDate: DateTime.now(),
+                  eventType: "Webinar",
+                  eventCategory: const ["Public Speaking", "Webinar"],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -159,17 +169,22 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       width: 400,
       height: 100,
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 4,
-          itemBuilder: (context, index) {
-            return HomepageProfile(
-              image: Image.asset('asset/img/homepage/speaker1.png'),
-              name: "John Doe $index",
-            );
-          },
-        ),
+      child: Flex(
+        direction: Axis.horizontal,
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return HomepageProfile(
+                  image: Image.asset('asset/img/homepage/speaker1.png'),
+                  name: "John Doe $index",
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
